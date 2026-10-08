@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proctre</title>
+<meta name="description" content="Proctre LLC: practical stewardship of money, time and habits. Home of Compositr and Working Dollars.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="/">PROCTRE LLC</a></div></header>
+<main id="main"><section class="hero">
+	<div class="wrap">
+		<p class="eyebrow">Proctre LLC</p>
+		<h1>The good guys, working <em>on your side</em>.</h1>
+	</div>
+</section>
+
+<section id="story">
+	<div class="wrap">
+		<div class="sec-h">
+			<p class="eyebrow">The story behind the name</p>
+			<h2>Someone who watches over you</h2>
+		</div>
+		<div class="story">
+			<div class="prose">
+				
+					<p>Too many people are never taught how to manage their money, time or habits, and plenty of companies profit from that gap.</p>
+					<p>Proctre exists to close that gap. The name blends <em>protect</em> and <em>proctor</em>: someone who watches over you.</p>
+					<p>Proctre believes in practical stewardship: teaching people to wisely manage God&rsquo;s gifts of money, time, talents and the people entrusted to our care.</p>
+				
+			</div>
+		</div>
+
+		<div class="origin">
+			<p class="eyebrow">The origin story (the fun version)</p>
+			<h3>A counter-agency to Spectre</h3>
+			<div class="prose">
+				<p>The name started as a joke. After a few James Bond movies, some friends and I made a short film, and while dreaming up a good-guy agency to fight Spectre, I coined the name Proctre.</p>
+				<p>Spectre is the fictional criminal organization in the Bond films: a global network of spies and criminals that operates in the shadows, exploiting governments, companies and individuals for profit and power.</p>
+				<p>Then it hit me: that&rsquo;s&hellip; just the financial services industry. Hidden fees, hidden agendas, hidden control and legalese that take advantage of people for someone else&rsquo;s gain. Confusing statements, products nobody explains, advice gatekept behind account minimums, and growing complexity that puts long-term investing out of reach for everyday people.</p>
+				<p>So the joke became the name. If Spectre is the villain preying on the unaware, I wanted the counter-agency: the good guys, working quietly on your behalf instead of against you. I started playing with the word, and <em>protect</em> was sitting right there the whole time. Blend in <em>proctor</em>, a person who watches over and guards, keep the <em>-tre</em> from Spectre as a wink to where it came from, and you land on Proctre. Two real words, one fake villain organization, and a pun that has held up a lot longer than I expected.</p>
+				<blockquote>That&rsquo;s the honest answer to &ldquo;Why Proctre?&rdquo; and it&rsquo;s why the mission has always been framed as protection first: watching over people&rsquo;s money, time and habits the way a proctor watches over a room. Quietly, attentively, on their side.</blockquote>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="brands">
+	<div class="wrap">
+		<div class="sec-h">
+			<p class="eyebrow">Our brands</p>
+			<h2>Two tools, one mission: stewardship</h2>
+		</div>
+		<div class="brands">
+			<article class="bcard c-violet">
+				<span class="badge">Live</span>
+				<h3>Compositr</h3>
+				<span class="dom">compositr.com</span>
+				<p>A writing studio for authors, speakers and pastors. Collect quotes, illustrations and verses, then arrange the pieces into one finished piece, like a work of art.</p>
+				<a class="btn vio" href="https://compositr.com" target="_blank" rel="noopener">Visit Compositr &rarr;</a>
+			</article>
+			<article class="bcard c-green">
+				<span class="badge">Coming soon</span>
+				<h3>Working Dollars</h3>
+				<span class="dom">workingdollars.com</span>
+				<p>A step-by-step money plan for everyday households, with the option of a personal money coach. Make your dollars work harder than you do.</p>
+				<!-- PLACEHOLDER: when Working Dollars launches, uncomment one of these buttons.
+				<a class="btn pri" href="https://workingdollars.com" target="_blank" rel="noopener">Visit Working Dollars &rarr;</a>
+				<a class="btn pri" href="/updates/">Get launch updates</a>
+				-->
+				
+			</article>
+		</div>
+	</div>
+</section>
+
+
+</main>
+<footer class="site-foot">
+	<div class="wrap">
+		<span>&copy; <span id="year">2026</span> Proctre LLC. Compositr and Working Dollars are brands of Proctre LLC.</span>
+		<!-- PLACEHOLDER: footer email. Fill in data-user and data-domain (e.g. "hello" and "proctre.com").
+		     The address is assembled in the browser, so it never appears in the page source for crawlers. -->
+		<a class="foot-email" data-user="" data-domain="" hidden></a>
+	</div>
+</footer>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+document.querySelectorAll('.foot-email').forEach(function (a) {
+	var u = a.dataset.user, d = a.dataset.domain;
+	if (!u || !d) return;
+	var addr = u + '@' + d;
+	a.href = 'mailto:' + addr;
+	a.textContent = addr;
+	a.hidden = false;
+});
+</script>
+</body>
+</html>
