@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <clipPath id="r"><rect width="64" height="64" rx="14"/></clipPath>
+  <g clip-path="url(#r)">
+    <rect width="64" height="64" fill="#16171d"/>
+    <rect width="21.4" height="7" fill="#ff8f3d"/>
+    <rect x="21.3" width="21.4" height="7" fill="#34c46d"/>
+    <rect x="42.6" width="21.4" height="7" fill="#9b85ff"/>
+  </g>
+  <path fill="#f2f2f5" fill-rule="evenodd" d="M18 16H36A13 13 0 0 1 36 42H29V54H18ZM29 25H35A4 4 0 0 1 35 33H29Z"/>
+</svg>
