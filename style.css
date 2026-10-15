@@ -56,8 +56,7 @@ a{color:var(--accent)}
 /* Hero */
 .hero{padding-block:clamp(28px,5vw,56px) 8px}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.hero h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.03em;font-weight:900;margin-top:8px;max-width:16ch}
-.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--green) 55%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.04;letter-spacing:-.03em;font-weight:900;margin-top:0;max-width:16ch}
 .lede{margin-top:18px;font-size:1.15rem;color:var(--fg-2);max-width:60ch}
 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 
