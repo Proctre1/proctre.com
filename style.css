@@ -100,3 +100,18 @@ section{padding-block:clamp(20px,3.5vw,36px)}
 .origin .prose p:first-child{font-size:1.05rem;color:var(--fg-2)}
 .origin blockquote{margin:14px 0 0;padding:4px 0 4px 18px;border-left:4px solid var(--green);font-family:var(--f-display);font-weight:800;font-size:1.15rem;line-height:1.45;color:var(--fg);max-width:62ch}
 .foot-email[hidden]{display:none}
+
+/* Hero radar (drawn by motion.js) */
+.hero{position:relative;overflow:hidden;isolation:isolate;min-height:clamp(260px,42vh,420px);display:flex;align-items:center}
+.hero .wrap{position:relative;z-index:1;width:100%}
+#radar{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* Logo beam-in (letters wrapped by motion.js) */
+.brand{position:relative;display:inline-block}
+.brand.beam .ch{display:inline-block;opacity:0;filter:blur(6px) brightness(3);animation:beamIn 1.6s cubic-bezier(.2,.7,.2,1) forwards}
+.brand.beam::after{content:"";position:absolute;inset:-30% -6%;pointer-events:none;mix-blend-mode:screen;opacity:0;
+  background:repeating-linear-gradient(90deg,rgba(255,200,140,0) 0 6px,rgba(255,200,140,.55) 6px 7px,rgba(255,200,140,0) 7px 13px),
+  linear-gradient(180deg,transparent,rgba(255,170,90,.35) 40%,rgba(255,170,90,.35) 60%,transparent);
+  animation:beamCol 1.9s ease-out forwards}
+@keyframes beamIn{0%{opacity:0;transform:translateY(-6px) scaleY(1.6)}55%{opacity:.7;filter:blur(2px) brightness(2.2)}100%{opacity:1;filter:none;transform:none}}
+@keyframes beamCol{0%{opacity:0;transform:scaleY(.2)}25%{opacity:1;transform:scaleY(1)}75%{opacity:.8}100%{opacity:0}}
