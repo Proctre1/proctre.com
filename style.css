@@ -88,7 +88,10 @@ canvas.wave{display:block;width:100%;height:120px}
 .log .t{font:400 13px/1.6 var(--f-mono);color:var(--gold)}
 .log p{font-size:14.5px;color:var(--ink-2)}
 .log .o{color:var(--orange);font-family:var(--f-logo);letter-spacing:.06em}
-.directive{font:600 19px/1.45 var(--f-ui);letter-spacing:.03em;color:var(--ink)}
+.orders{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:8px}
+.orders li{display:flex;align-items:baseline;gap:12px;font:700 22px/1.1 var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.orders span{font:400 14px/1 var(--f-mono);color:var(--orange)}
+.directive{padding-top:14px;border-top:1px solid var(--frame);font:600 17px/1.45 var(--f-ui);letter-spacing:.03em;color:var(--ink-2)}
 
 .glyphs{padding:10px 0;border-top:1px solid var(--frame);font:400 13px/1 var(--f-mono);color:var(--cyan-dim);letter-spacing:.3em;white-space:nowrap;overflow:hidden}
 
