@@ -36,12 +36,29 @@
 		links.forEach(function (a) { a.classList.toggle('sel', a === byId[id]); });
 	}
 	links.forEach(function (a) { a.addEventListener('click', function () { select(a.getAttribute('href').slice(1)); }); });
-	if ('IntersectionObserver' in window) {
-		var spy = new IntersectionObserver(function (es) {
-			es.forEach(function (e) { if (e.isIntersecting) select(e.target.id); });
-		}, { rootMargin: '-35% 0px -55% 0px' });
-		Object.keys(byId).forEach(function (id) { var el = document.getElementById(id); if (el) spy.observe(el); });
+
+	// While scrolling, follow the top-level section whose top has reached the upper part of the screen.
+	// The three brand panels sit side by side, so they light up only when clicked; scrolling
+	// within Systems status keeps a clicked brand highlighted.
+	var SECTIONS = ['mission', 'systems', 'origin'], BRANDS = ['compositr', 'working-dollars', 'sermonal'];
+	var current = null, ticking = false;
+	function spy() {
+		ticking = false;
+		var line = Math.min(window.innerHeight * 0.3, 140), found = SECTIONS[0];
+		SECTIONS.forEach(function (id) {
+			var el = document.getElementById(id);
+			if (el && el.getBoundingClientRect().top <= line) found = id;
+		});
+		// At the very bottom the last section can't reach the line, so pick it outright.
+		if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) found = SECTIONS[SECTIONS.length - 1];
+		if (found === current) return;
+		current = found;
+		var sel = document.querySelector('.menu a.sel');
+		var onBrand = sel && BRANDS.indexOf(sel.getAttribute('href').slice(1)) !== -1;
+		if (!(found === 'systems' && onBrand)) select(found);
 	}
+	window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+	spy();
 
 	/* Signal scope: gold and cyan traces with a moving cursor. Paused when off screen. */
 	var c = document.getElementById('wave');
