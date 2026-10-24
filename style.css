@@ -63,6 +63,7 @@ h1,h2,h3,p,ol{margin:0}
 .hero h1{margin:14px 0 10px;font:700 clamp(2rem,4.6vw,3.4rem)/1.02 var(--f-ui);letter-spacing:.02em;text-transform:uppercase}
 .hero p{color:var(--ink-2);max-width:64ch}
 .hero p+p{margin-top:8px}
+.hero .intro{margin-bottom:6px;font:600 17px/1.5 var(--f-body);color:var(--ink)}
 .scope{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px;margin-top:18px}
 canvas.wave{display:block;width:100%;height:120px}
 .readout{display:grid;gap:8px;align-content:center;padding-left:14px;border-left:1px solid var(--frame);font:400 12px/1.25 var(--f-mono);color:var(--mute);letter-spacing:.06em}
