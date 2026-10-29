@@ -38,9 +38,9 @@
 	links.forEach(function (a) { a.addEventListener('click', function () { select(a.getAttribute('href').slice(1)); }); });
 
 	// While scrolling, follow the top-level section whose top has reached the upper part of the screen.
-	// The three brand panels sit side by side, so they light up only when clicked; scrolling
+	// The brand panels sit side by side, so they light up only when clicked; scrolling
 	// within Systems status keeps a clicked brand highlighted.
-	var SECTIONS = ['mission', 'systems', 'origin'], BRANDS = ['compositr', 'working-dollars', 'sermonal'];
+	var SECTIONS = ['mission', 'systems', 'origin'], BRANDS = ['compositr', 'working-dollars'];
 	var current = null, ticking = false;
 	function spy() {
 		ticking = false;

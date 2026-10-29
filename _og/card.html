@@ -1,0 +1,63 @@
+<!doctype html>
+<!-- Source for og-image.png (the 1200x630 share card). Not published: GitHub Pages skips folders starting with "_".
+     Rebuild with headless Edge, e.g.:
+     msedge --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 --screenshot=og-image.png _og/card.html
+     To show a brand, add or remove its <div class="s"> row below. -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Rajdhani:wght@700&family=Share+Tech+Mono&display=block">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;color:#d9eef8;background:radial-gradient(ellipse 80% 70% at 65% 20%,#0b2233 0%,#03070c 72%)}
+.box{position:absolute;inset:28px;display:grid;grid-template-rows:auto 1fr auto;gap:18px}
+.hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1f4c63;padding-bottom:16px}
+.logo{font:700 78px/1 "Space Grotesk";letter-spacing:.08em;color:#ff7a1a;text-shadow:0 0 30px rgba(255,122,26,.5)}
+.meta{font:22px/1.3 "Share Tech Mono";color:#7f9cad;text-align:right;letter-spacing:.06em}
+.meta b{color:#62d6ff;font-weight:400}
+.frame{background:#3f8fb2;padding:2px;clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px)}
+.in{height:100%;box-sizing:border-box;padding:22px 28px;background:linear-gradient(180deg,#0e2030,#08141e);clip-path:inherit;display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:center}
+.lbl{font:700 18px/1 Rajdhani;letter-spacing:.24em;color:#62d6ff;display:flex;align-items:center;gap:10px}
+.lbl i{width:26px;height:5px;background:#62d6ff}
+h1{margin:16px 0 0;font:700 64px/1 Rajdhani;text-transform:uppercase;letter-spacing:.02em}
+.seg{display:flex;gap:4px;height:12px;margin-top:16px}
+.seg i{flex:1;background:#62d6ff;box-shadow:0 0 6px rgba(98,214,255,.6)}
+canvas{width:100%;height:220px}
+.sys{display:flex;gap:16px}
+.s{flex:1;border:2px solid var(--c);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 24px/1 Rajdhani;letter-spacing:.07em;color:var(--c)}
+.s span{font:16px/1 "Share Tech Mono";letter-spacing:.08em;border:1px solid currentColor;padding:4px 6px}
+</style></head><body><div class="box">
+<div class="hdr"><div class="logo">PROCTRE</div><div class="meta">STEWARDSHIP NETWORK<br>STATUS <b>&#9679; ACTIVATING</b></div></div>
+<div class="frame"><div class="in"><div><div class="lbl"><i></i>MISSION ANALYTICS</div><h1>The good guys,<br>working on<br>your side.</h1><div class="seg" id="seg"></div></div><canvas id="c" width="1040" height="440"></canvas></div></div>
+<div class="sys">
+  <div class="s" style="--c:#a592ff">COMPOSITR<span style="color:#3fd68a">ONLINE</span></div>
+  <div class="s" style="--c:#3fd68a">WORKING DOLLARS<span style="color:#e8b35a">STANDBY</span></div>
+</div>
+</div>
+<script>
+var s = document.getElementById('seg');
+for (var i = 0; i < 20; i++) s.appendChild(document.createElement('i'));
+var c = document.getElementById('c'), x = c.getContext('2d'); x.scale(2, 2);
+var w = 520, h = 220, t = 1.7;
+x.strokeStyle = 'rgba(63,143,178,.3)'; x.lineWidth = 1;
+for (var g = 0; g <= 8; g++) { x.beginPath(); x.moveTo(w * g / 8, 0); x.lineTo(w * g / 8, h); x.stroke(); }
+x.beginPath(); x.moveTo(0, h / 2); x.lineTo(w, h / 2); x.stroke();
+function tr(col, ph, amp, tt) {
+  x.strokeStyle = col; x.lineWidth = 1.6; x.shadowColor = col; x.shadowBlur = 10;
+  for (var l = 0; l < 3; l++) {
+    x.globalAlpha = l ? .35 : 1; x.beginPath();
+    for (var px = 0; px <= w; px += 2) {
+      var u = px / w, e = Math.sin(u * Math.PI);
+      var y = h / 2 + e * amp * (Math.sin(u * 22 + tt * 2.1 + ph + l * .6) * .6 + Math.sin(u * 51 - tt * 3.3 + l) * .3 + Math.sin(u * 7 + tt * .7) * .4);
+      px ? x.lineTo(px, y) : x.moveTo(px, y);
+    }
+    x.stroke();
+  }
+  x.globalAlpha = 1; x.shadowBlur = 0;
+}
+tr('#e8b35a', 0, h * .32, t);
+tr('#62d6ff', 2.1, h * .26, t * 1.15);
+x.strokeStyle = 'rgba(217,238,248,.85)'; x.beginPath(); x.moveTo(w * .62, 6); x.lineTo(w * .62, h - 6); x.stroke();
+document.fonts.ready.then(function () {
+  x.fillStyle = '#7f9cad'; x.font = '13px "Share Tech Mono"';
+  x.fillText('PROTECT', 4, h - 6); x.fillText('PROCTOR', w - 62, h - 6);
+  x.fillStyle = '#d9eef8'; x.fillText('T+' + t.toFixed(1), w * .62 + 6, 16);
+});
+</script></body></html>
