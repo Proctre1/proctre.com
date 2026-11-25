@@ -85,7 +85,7 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 .notfound .label{color:var(--orange)}
 .notfound h1{font-size:clamp(1.8rem,4.6vw,3.4rem);line-height:1.04}
 
-/* Ledger page (/ledger/): same flat blocks, with Ledger's cyan in place of orange as the accent. */
+/* Fulcra page (/fulcra/; body class "ledger"): same flat blocks, with Fulcra's cyan in place of orange as the accent. */
 .ledger .nav a:hover{border-color:var(--cyan)}
 .ledger .jump a{text-decoration-color:var(--cyan)}
 .ledger .jump a:hover{color:var(--cyan)}
@@ -125,7 +125,7 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 .lg-status .jump a{text-decoration-color:var(--navy)}
 .lg-status .jump a:hover{color:var(--navy);text-decoration-thickness:5px}
 
-/* Ledger page motion. Everything rests visible; the script only hides items that start below the fold. */
+/* Fulcra page motion. Everything rests visible; the script only hides items that start below the fold. */
 .rise{animation:lg-rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 90ms + 60ms)}
 @keyframes lg-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .lg-bars span{animation:lg-grow .9s cubic-bezier(.2,.8,.2,1) both}
