@@ -8,38 +8,28 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#03070c">
+<meta name="theme-color" content="#0c1a26">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
 <!-- Paths start with "/" on purpose: this page is shown for any missing address, at any depth. -->
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=2">
 </head>
 <body>
-<div class="wrap">
-	<header class="hdr">
-		<a class="logo" href="/" aria-label="Proctre home">PROCTRE</a>
-		<div class="meta" aria-hidden="true">
-			<div class="dots"><i></i><i></i><i></i><i></i><i></i></div>
-			<span>STATION <b>PRC-01</b> &middot; STEWARDSHIP NETWORK</span>
-			<span>STATUS <b>&#9679; SIGNAL LOST</b></span>
-		</div>
-	</header>
+<header class="top"><div class="wrap">
+	<a class="mark wide" href="/" aria-label="Proctre home">Proctre</a>
+</div></header>
 
-	<main class="main" id="main" style="padding:22px 0 28px">
-		<section class="frame hi"><div class="in scan hero" style="--c:var(--cyan)">
-			<div class="ph"><span class="tick org"></span><span class="lbl">Error 404 &middot; page not found</span><span class="rule"></span></div>
-			<h1>Nothing at<br>this address.</h1>
-			<p class="intro">The page you were looking for isn&rsquo;t here. It may have moved, or the link may have a typo.</p>
-			<p>Nothing is wrong on your end. The home page has everything Proctre currently offers.</p>
-			<p style="margin-top:18px"><a class="go" href="/" style="display:inline-block">Return to home &rarr;</a></p>
-		</div></section>
-	</main>
+<main id="main" class="notfound"><div class="wrap">
+	<p class="label">Error 404 &middot; page not found</p>
+	<h1 class="wide">Nothing at this address.</h1>
+	<p class="lede">The page you were looking for isn&rsquo;t here. It may have moved, or the link may have a typo. Nothing is wrong on your end.</p>
+	<p class="jump"><a href="/">Return to the home page</a></p>
+</div></main>
 
-	<footer class="site-foot">
-		<span>&copy; <span id="year">2026</span> Proctre LLC. Compositr and Working Dollars are brands of Proctre LLC.</span>
-	</footer>
-</div>
-<script src="/console.js" defer></script>
+<footer class="site-foot"><div class="wrap">
+	<span>&copy; <span id="year">2026</span> Proctre LLC. Compositr and Working Dollars are brands of Proctre LLC.</span>
+</div></footer>
+<script src="/site.js" defer></script>
 </body>
 </html>
