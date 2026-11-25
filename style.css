@@ -5,7 +5,7 @@
 :root{
   color-scheme:dark;
   --navy:#0c1a26; --navy-2:#13273a; --paper:#f4efe4; --paper-2:#b9c2c6;
-  --orange:#ff7a1a; --violet:#a592ff; --green:#3fd68a;
+  --orange:#ff7a1a; --violet:#a592ff; --green:#3fd68a; --cyan:#4cc8e6;
   --f-display:"Archivo","Arial Black","Segoe UI",sans-serif;
   --f-text:"Newsreader",Georgia,"Times New Roman",serif;
   --max:1160px; --gutter:22px;
@@ -41,11 +41,12 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 .jump a{text-decoration:underline;text-decoration-color:var(--orange);text-decoration-thickness:3px;text-underline-offset:6px}
 .jump a:hover{color:var(--orange)}
 
-/* Brands: two flat colour blocks, edge to edge. Each block sets its own colour with --c. */
-.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+/* Brands: three flat colour blocks, edge to edge. Each block sets its own colour with --c. */
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .tool{background:var(--c);color:var(--navy);text-decoration:none;padding:clamp(30px,5vw,64px) var(--gutter) clamp(34px,5vw,64px)}
-.tool .in{display:grid;gap:18px;align-content:start;width:100%;max-width:calc(var(--max) / 2 - var(--gutter) * 2)}
+.tool .in{display:grid;gap:18px;align-content:start;width:100%;max-width:calc(var(--max) / 3 - var(--gutter) * 2)}
 .tool:first-child .in{margin-left:auto}
+.tool:nth-child(2) .in{margin-inline:auto}
 .tool .label{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px}
 .tool h3{font-size:clamp(1.5rem,2.7vw,2.2rem);line-height:1.05}
 .tool p{font:400 1.2rem/1.5 var(--f-text);max-width:34ch}
@@ -87,6 +88,10 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 /* Footer */
 .site-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:26px;font-size:14px;color:var(--paper-2)}
 
+@media (max-width:1000px){
+  .tools{grid-template-columns:minmax(0,1fr)}
+  .tool .in,.tool:first-child .in,.tool:nth-child(2) .in{max-width:var(--max);margin-inline:auto}
+}
 @media (max-width:760px){
   .nav{display:none}
   .tools,.story .wrap{grid-template-columns:minmax(0,1fr)}
