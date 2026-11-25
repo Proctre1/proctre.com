@@ -85,6 +85,59 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 .notfound .label{color:var(--orange)}
 .notfound h1{font-size:clamp(1.8rem,4.6vw,3.4rem);line-height:1.04}
 
+/* Ledger page (/ledger/): same flat blocks, with Ledger's cyan in place of orange as the accent. */
+.ledger .nav a:hover{border-color:var(--cyan)}
+.ledger .jump a{text-decoration-color:var(--cyan)}
+.ledger .jump a:hover{color:var(--cyan)}
+.lg-accent{color:var(--cyan)}
+.lg-hero .wrap{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:clamp(30px,5vw,72px)}
+.lg-copy{display:grid;gap:30px}
+.ledger .hero h1{max-width:13ch}
+.ledger .hero h1 mark{background:var(--cyan)}
+.lg-panel{background:var(--cyan);color:var(--navy);padding:clamp(22px,3vw,34px);display:grid;gap:14px}
+.lg-panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px}
+.lg-figure{font-size:clamp(2.4rem,5vw,3.6rem);line-height:1;font-variant-numeric:tabular-nums}
+.lg-note{font:400 1.08rem/1.45 var(--f-text);max-width:34ch}
+.lg-bars{display:flex;align-items:flex-end;gap:6px;height:84px;margin-top:6px}
+.lg-bars span{flex:1;height:var(--h);background:var(--navy);transform-origin:bottom}
+.lg-bars span:nth-child(even){opacity:.35}
+.lg-rows{display:grid;border-top:3px solid var(--navy)}
+.lg-rows li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(12,26,38,.25);font-weight:700;font-variant-numeric:tabular-nums}
+.lg-rows b{font:700 11px/1 var(--f-display);font-stretch:110%;letter-spacing:.12em;text-transform:uppercase;margin-left:8px;vertical-align:2px}
+.lg-features .wrap{display:grid;gap:clamp(32px,5vw,56px);padding-block:clamp(56px,8vw,112px)}
+.lg-head{display:grid;gap:16px;max-width:44em}
+.lg-h2{font-size:clamp(1.35rem,2.4vw,1.95rem);line-height:1.08}
+.lg-sub{font:400 clamp(1.15rem,1.5vw,1.3rem)/1.5 var(--f-text);max-width:52ch}
+.lg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}
+.lg-grid li{display:grid;gap:10px;align-content:start;border-top:3px solid var(--cyan);padding-top:18px}
+.lg-grid h3{font-size:1.1rem;line-height:1.15}
+.lg-grid p{font:400 1.15rem/1.5 var(--f-text);color:var(--paper)}
+.ledger .orders .label{color:var(--cyan)}
+.ledger .orders li:nth-child(2){color:var(--cyan)}
+.lg-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 40px;max-width:var(--max)}
+.lg-points p{font:400 1.15rem/1.5 var(--f-text);max-width:46ch}
+.lg-points b{font-weight:600;color:var(--cyan)}
+.lg-plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lg-plans .tool .in{max-width:calc(var(--max) / 2 - var(--gutter) * 2)}
+.lg-plans .tool:nth-child(2) .in{margin-inline:0 auto}
+.lg-plans .tool:hover h3{text-decoration:none}
+.lg-status .label{color:var(--navy)}
+.lg-status .jump a{text-decoration-color:var(--navy)}
+.lg-status .jump a:hover{color:var(--navy);text-decoration-thickness:5px}
+
+/* Ledger page motion. Everything rests visible; the script only hides items that start below the fold. */
+.rise{animation:lg-rise .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 90ms + 60ms)}
+@keyframes lg-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lg-bars span{animation:lg-grow .9s cubic-bezier(.2,.8,.2,1) both}
+.lg-bars span:nth-child(1){animation-delay:.55s}.lg-bars span:nth-child(2){animation-delay:.61s}
+.lg-bars span:nth-child(3){animation-delay:.67s}.lg-bars span:nth-child(4){animation-delay:.73s}
+.lg-bars span:nth-child(5){animation-delay:.79s}.lg-bars span:nth-child(6){animation-delay:.85s}
+.lg-bars span:nth-child(7){animation-delay:.91s}.lg-bars span:nth-child(8){animation-delay:.97s}
+.lg-bars span:nth-child(9){animation-delay:1.03s}.lg-bars span:nth-child(10){animation-delay:1.09s}
+@keyframes lg-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.js .reveal{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0) * 80ms)}
+.js .reveal.pending{opacity:0;transform:translateY(18px)}
+
 /* Footer */
 .site-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:26px;font-size:14px;color:var(--paper-2)}
 
@@ -97,7 +150,15 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
   .tools,.story .wrap{grid-template-columns:minmax(0,1fr)}
   .tool .in{max-width:none}
 }
+@media (max-width:900px){
+  .lg-hero .wrap{grid-template-columns:minmax(0,1fr)}
+  .lg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .lg-grid,.lg-points{grid-template-columns:minmax(0,1fr)}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *{transition:none!important}
+  *{transition:none!important;animation:none!important}
+  .js .reveal.pending{opacity:1;transform:none}
 }
