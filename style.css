@@ -68,8 +68,7 @@ a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
 .story .side{display:grid;gap:16px;align-content:start}
 .story .side .label{color:var(--orange)}
 .letter{display:grid;gap:1.15em;font:400 clamp(1.15rem,1.5vw,1.3rem)/1.6 var(--f-text);max-width:60ch}
-.letter p:first-child{font-size:1.2em;line-height:1.5}
-.letter b{font-family:var(--f-display);font-weight:800;color:var(--orange)}
+.letter b{font-weight:600;color:var(--orange)}
 
 /* Standing orders */
 .orders{background:var(--navy-2)}
