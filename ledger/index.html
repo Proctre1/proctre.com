@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Proctre Ledger — In development</title>
+<meta name="description" content="Proctre Ledger is private, local-first accounting for small businesses and the practices that serve them. Books, statements, filing deadlines and tax estimates in one desktop app. Currently in development.">
+<meta property="og:title" content="Proctre Ledger — In development">
+<meta property="og:description" content="Private, local-first accounting. Your books stay on your computer.">
+<link rel="canonical" href="https://proctre.com/ledger/">
+<meta property="og:url" content="https://proctre.com/ledger/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d1b26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect x='64' y='64' width='896' height='896' rx='200' fill='%230d1b26'/%3E%3Crect x='232' y='232' width='560' height='600' rx='56' fill='%2313293a' stroke='%233cc7a3' stroke-width='28'/%3E%3Cpath d='M332 360h360M332 470h360M332 580h220' stroke='%23c9d4de' stroke-width='36' stroke-linecap='round'/%3E%3Ccircle cx='660' cy='680' r='92' fill='%233cc7a3'/%3E%3Cpath d='M615 682l32 32 62-70' stroke='%230d1b26' stroke-width='30' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --navy: #0d1b26;
+    --navy-2: #13293a;
+    --navy-3: #1f3445;
+    --teal: #3cc7a3;
+    --teal-deep: #0f6e5a;
+    --ink: #e6ecf1;
+    --ink-2: #b8c4cf;
+    --muted: #8b9aa7;
+    --line: #26394a;
+    --radius: 14px;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--navy);
+    color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--teal); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+
+  /* Header */
+  header { padding: 28px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 650; letter-spacing: -0.01em; }
+  .brand svg { width: 32px; height: 32px; }
+  .brand span { color: var(--muted); font-weight: 500; }
+  .pill { font-size: 13px; color: var(--teal); border: 1px solid rgba(60,199,163,.4); background: rgba(60,199,163,.08); padding: 5px 12px; border-radius: 999px; white-space: nowrap; }
+
+  /* Hero */
+  .hero { position: relative; padding: 56px 0 72px; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -20% -10% auto auto; width: 720px; height: 720px;
+    background: radial-gradient(closest-side, rgba(60,199,163,.16), transparent 70%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+  .eyebrow { color: var(--teal); font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 16px; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.06; letter-spacing: -0.03em; margin: 0 0 20px; font-weight: 700; }
+  h1 em { font-style: normal; color: var(--teal); }
+  .lede { font-size: 1.15rem; color: var(--ink-2); max-width: 34em; margin: 0 0 32px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 15px; transition: transform .15s ease, background .15s ease; }
+  .btn-primary { background: var(--teal); color: #062018; }
+  .btn-primary:hover { background: #55d6b4; transform: translateY(-1px); }
+  .btn-ghost { color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  .fine { color: var(--muted); font-size: 14px; margin-top: 16px; }
+
+  /* Product preview */
+  .preview { background: var(--navy-2); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  .preview-bar { display: flex; gap: 6px; margin-bottom: 16px; }
+  .preview-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--navy-3); }
+  .stat { background: var(--navy); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+  .stat small { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .stat strong { display: block; font-size: 2rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .stat .sub { color: var(--ink-2); font-size: 13px; }
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 72px; margin-top: 12px; }
+  .bars span { flex: 1; border-radius: 4px 4px 0 0; background: var(--teal); opacity: .85; }
+  .bars span:nth-child(even) { background: var(--navy-3); opacity: 1; }
+  .rows { display: grid; gap: 8px; }
+  .row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 10px 14px; background: var(--navy); border: 1px solid var(--line); border-radius: 10px; }
+  .row span:last-child { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(240,184,96,.14); color: #f0b860; margin-left: 6px; }
+  .tag.ok { background: rgba(60,199,163,.14); color: var(--teal); }
+
+  /* Sections */
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 12px; }
+  .section-lede { color: var(--ink-2); max-width: 40em; margin: 0 0 40px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--navy-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .card h3 { font-size: 1.05rem; margin: 14px 0 6px; }
+  .card p { color: var(--ink-2); margin: 0; font-size: 15px; }
+  .icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: rgba(60,199,163,.12); color: var(--teal); }
+  .icon svg { width: 22px; height: 22px; }
+
+  .privacy { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .checks li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; color: var(--ink-2); }
+  .checks li b { color: var(--ink); font-weight: 600; }
+  .checks svg { width: 22px; height: 22px; color: var(--teal); margin-top: 2px; }
+
+  .audience { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .audience .card { padding: 28px; }
+  .audience .label { color: var(--teal); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+  .audience ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-2); }
+  .audience li { margin: 4px 0; }
+
+  .signup { text-align: center; }
+  .signup .section-lede { margin-left: auto; margin-right: auto; }
+  .signup .pill { display: inline-block; margin-bottom: 18px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+  footer a { color: var(--ink-2); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 880px) {
+    .hero .wrap, .privacy { grid-template-columns: 1fr; gap: 40px; }
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+    .hero { padding: 32px 0 56px; }
+    section { padding: 56px 0; }
+    .grid, .audience { grid-template-columns: 1fr; }
+    .btn { width: 100%; justify-content: center; }
+    .brand span { display: none; }
+  }
+    /* Motion */
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); margin-right: 8px; vertical-align: 1px; animation: pulse 2.2s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(60,199,163,.6); } 70%, 100% { box-shadow: 0 0 0 8px rgba(60,199,163,0); } }
+  .rise { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d, 0) * 90ms + 80ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .hero::before { animation: drift 14s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(-80px, 60px) scale(1.12); } }
+  .preview-float { animation: rise .9s cubic-bezier(.2,.7,.2,1) .35s both; }
+  .preview { animation: float 7s ease-in-out 1.3s infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .bars span { transform-origin: bottom; animation: grow .9s cubic-bezier(.2,.8,.2,1) both; }
+  .bars span:nth-child(1) { animation-delay: .60s } .bars span:nth-child(2) { animation-delay: .66s }
+  .bars span:nth-child(3) { animation-delay: .72s } .bars span:nth-child(4) { animation-delay: .78s }
+  .bars span:nth-child(5) { animation-delay: .84s } .bars span:nth-child(6) { animation-delay: .90s }
+  .bars span:nth-child(7) { animation-delay: .96s } .bars span:nth-child(8) { animation-delay: 1.02s }
+  .bars span:nth-child(9) { animation-delay: 1.08s } .bars span:nth-child(10) { animation-delay: 1.14s }
+  @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  .row { animation: slide .6s cubic-bezier(.2,.7,.2,1) both; }
+  .row:nth-child(1) { animation-delay: 1.1s } .row:nth-child(2) { animation-delay: 1.25s } .row:nth-child(3) { animation-delay: 1.4s }
+  @keyframes slide { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+  .card { transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+  .card:hover { transform: translateY(-3px); border-color: rgba(60,199,163,.45); }
+  .card .icon { transition: transform .3s ease; }
+  .card:hover .icon { transform: rotate(-6deg) scale(1.08); }
+  /* Scroll reveal: content is visible by default; script only hides items that start below the fold. */
+  .js .reveal.pending { opacity: 0; transform: translateY(18px); }
+  .js .reveal { transition: border-color .25s ease, opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 80ms); }
+  .checks path { stroke-dasharray: 24; stroke-dashoffset: 0; transition: stroke-dashoffset .6s ease .2s; }
+  .js .checks li.pending path { stroke-dashoffset: 24; }
+  .btn:focus-visible, .brand:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .reveal.pending { opacity: 1; transform: none; }
+    .js .checks li.pending path { stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Proctre home">
+      <svg viewBox="0 0 1024 1024" aria-hidden="true"><rect x="64" y="64" width="896" height="896" rx="200" fill="#13293a"/><rect x="232" y="232" width="560" height="600" rx="56" fill="#0d1b26" stroke="#3cc7a3" stroke-width="28"/><path d="M332 360h360M332 470h360M332 580h220" stroke="#c9d4de" stroke-width="36" stroke-linecap="round"/><circle cx="660" cy="680" r="92" fill="#3cc7a3"/><path d="M615 682l32 32 62-70" stroke="#0d1b26" stroke-width="30" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Proctre Ledger <span>by Proctre</span>
+    </a>
+    <span class="pill"><i class="dot"></i>In development</span>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow rise" style="--d:0">Accounting, taxes &amp; compliance</p>
+        <h1 class="rise" style="--d:1">Your books. <em>Your computer.</em> Nobody else's.</h1>
+        <p class="lede rise" style="--d:2">Proctre Ledger is a desktop accounting app for small business owners and the practices that serve them. Books, financial statements, filing deadlines and tax estimates in one place, encrypted and kept on your own machine.</p>
+        <div class="cta-row rise" style="--d:3">
+          <a class="btn btn-primary" href="#features">See what's inside</a>
+          <a class="btn btn-ghost" href="#privacy">How your data stays private</a>
+        </div>
+        <p class="fine rise" style="--d:4">For Mac, Windows and Linux. Every plan starts with a 30-day free trial.</p>
+      </div>
+
+      <div class="preview-float"><div class="preview" aria-hidden="true">
+        <div class="preview-bar"><i></i><i></i><i></i></div>
+        <div class="stat">
+          <small>Safe to spend</small>
+          <strong id="sts" data-to="18240">$18,240</strong>
+          <span class="sub">After taxes set aside, bills due in 30 days and a 1-month cushion</span>
+          <div class="bars">
+            <span style="height:46%"></span><span style="height:38%"></span>
+            <span style="height:58%"></span><span style="height:41%"></span>
+            <span style="height:66%"></span><span style="height:44%"></span>
+            <span style="height:72%"></span><span style="height:47%"></span>
+            <span style="height:84%"></span><span style="height:50%"></span>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row"><span>Q4 estimated tax <span class="tag">Jan 15</span></span><span>$4,310</span></div>
+          <div class="row"><span>Invoice 104 · Rivera <span class="tag ok">Paid</span></span><span>$4,200.00</span></div>
+          <div class="row"><span>October close <span class="tag ok">Locked</span></span><span>6 / 6</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2 class="reveal">Everything a small business needs to close the books</h2>
+      <p class="section-lede reveal">One app for the owner's books and the practice that keeps them, from the first bank import to the locked month.</p>
+      <div class="grid">
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg></div>
+          <h3>Real financial statements</h3>
+          <p>P&amp;L, balance sheet, cash flow and trial balance, per entity or consolidated with intercompany eliminations.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+          <h3>Filing calendar</h3>
+          <p>Federal and state deadlines by entity type and fiscal year end, moved to the next business day, exportable to your calendar.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Tax estimates</h3>
+          <p>Owner 1040 projections linked to the books, self-employment tax, QBI, safe harbor and a quarterly payment plan.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+          <h3>Invoices &amp; receipts</h3>
+          <p>Send invoices, match payments to bank deposits automatically, and keep receipts linked from your own Drive folder.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Guided month-end close</h3>
+          <p>A checklist per entity: imports current, nothing uncategorized, accounts reconciled, unusual changes reviewed, month locked.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div>
+          <h3>Quick add &amp; insights</h3>
+          <p>Type “Paid 59.99 to Adobe yesterday with Amex” and it's booked. Plain-English notes flag late invoices and tax not set aside.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="wrap privacy">
+      <div>
+        <p class="eyebrow reveal">Private by design</p>
+        <h2 class="reveal">No cloud. No bank logins. No one reading your numbers.</h2>
+        <p class="section-lede reveal">Most accounting software keeps your books on someone else's servers. Proctre Ledger keeps them in a single encrypted file that you own.</p>
+      </div>
+      <ul class="checks">
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span><b>Encrypted company files.</b> Each set of books is one AES-256 encrypted file, autosaved with rolling backups.</span></li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span><b>Nothing leaves your device.</b> No server receives your data, and license keys are checked offline.</span></li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span><b>No sensitive identifiers.</b> No SSN or EIN fields, and account numbers in imported statements are masked to the last 4.</span></li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span><b>Your data is never held hostage.</b> If a license lapses, you can still open, export and back up everything.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="reveal">Two plans, one app</h2>
+      <p class="section-lede reveal">Start with a 30-day trial of every feature, then pick the plan that fits.</p>
+      <div class="audience">
+        <div class="card reveal">
+          <div class="label">Personal</div>
+          <h3>For business owners</h3>
+          <ul>
+            <li>Your own group of entities: LLC, S-corp, partnership and your 1040</li>
+            <li>Safe-to-spend, tax set-asides and quarterly estimates</li>
+            <li>Home office, mileage and subscription tracking</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <div class="label">Practice</div>
+          <h3>For accountants &amp; bookkeepers</h3>
+          <ul>
+            <li>Unlimited clients, each with their own entities</li>
+            <li>Engagement tracker and document-request checklists</li>
+            <li>Every client's filing deadlines on one board</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup" id="launch">
+    <div class="wrap">
+      <span class="pill reveal"><i class="dot"></i>In development</span>
+      <h2 class="reveal">Being built now</h2>
+      <p class="section-lede reveal">Proctre Ledger is in active development. When it’s ready, downloads for Mac, Windows and Linux will be posted on this page.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Proctre LLC</span>
+    <span><a href="/">proctre.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+  // Count up the safe-to-spend figure.
+  var el = document.getElementById('sts');
+  if (el && !reduce) {
+    var to = +el.dataset.to, t0 = null, dur = 1400;
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+    el.textContent = fmt(0);
+    setTimeout(function () {
+      requestAnimationFrame(function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
+        el.textContent = fmt(to * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      });
+    }, 500);
+  }
+  // Reveal below-the-fold items as they scroll in; anything already on screen stays visible.
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  var groups = new Map();
+  items.forEach(function (n) {
+    var g = groups.get(n.parentNode) || 0;
+    groups.set(n.parentNode, g + 1);
+    if (n.getBoundingClientRect().top > innerHeight * 0.92) { n.style.setProperty('--i', g); n.classList.add('pending'); }
+  });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) {
+        var n = e.target;
+        n.classList.remove('pending'); io.unobserve(n);
+        setTimeout(function () { n.style.removeProperty('--i'); }, 1500);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  items.forEach(function (n) { if (n.classList.contains('pending')) io.observe(n); });
+  // Safety net: never leave content hidden.
+  setTimeout(function () { items.forEach(function (n) { n.classList.remove('pending'); }); }, 8000);
+})();
+</script>
+</body>
+</html>
